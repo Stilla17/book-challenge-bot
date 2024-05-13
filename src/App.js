@@ -44,7 +44,7 @@ function App() {
       <div className="mx-auto max-w-[900px] mt-12">
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} /> */}
+          <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
           <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
 
           {/* <div>
