@@ -102,7 +102,7 @@ function App() {
                 />
               </div>
 
-              <button type='button' onClick={() => remove(index)}>Remove</button>
+              <button type='button' className='bg-red-500 text-white py-2 w-full rounded-md mt-12' onClick={() => remove(index)}>Remove</button>
             </div>
           ))}
 
