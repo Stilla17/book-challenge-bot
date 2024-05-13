@@ -59,25 +59,6 @@ function App() {
           <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
           <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
 
-          {/* <div>
-            <input type='text' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' placeholder={` Kitob nomini kiriting`} {...register(`bookName`, { required: true })} />
-
-            <div className='flex gap-5 mt-6'>
-
-              <label className='flex flex-col text-gray-700 text-sm font-medium '>
-                <span className='block text-gray-500'>Sahifadan</span>
-                <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md'  {...register(`pageFrom`, { required: true })} />
-              </label>
-
-              <label className='flex flex-col text-gray-700 text-sm font-medium '>
-                <span className='block text-gray-500'>Sahifagacha</span>
-                <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md' {...register(`pageTo`, { required: true })} />
-              </label>
-
-            </div>
-          </div> */}
-
-
           {fields.map((item, index) => (
             <div key={item.id}>
               <input
@@ -113,7 +94,7 @@ function App() {
           </div>
 
           <button onClick={onSendButton} className='bg-green-500 text-white py-2 w-full rounded-md mt-12'>Jo'natish</button>
-        </form> max-w-full
+        </form>
       </div>
     </>
   );
