@@ -1,11 +1,23 @@
 import { useCallback, useEffect, useState } from 'react';
 import './App.css';
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 function App() {
 
   const tg = window.Telegram.WebApp
 
-  const { register, handleSubmit } = useForm()
+  // const { register, handleSubmit } = useForm()
+
+  const { register, control, handleSubmit } = useForm({
+    defaultValues: {
+      books: [{ bookName: '', pageFrom: '', pageTo: '' }],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'books',
+  });
+
   const [inputCount, setInputCount] = useState(1);
 
   const onSubmit = (data) => {
@@ -66,29 +78,36 @@ function App() {
           </div> */}
 
 
-          {
-            [...Array(inputCount)].map((_, index) => (
-              <div key={index}>
-                <input type='text' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' placeholder={`${index + 1}. Kitob nomini kiriting`} {...register(`bookName${index}`, { required: true })} />
+          {fields.map((item, index) => (
+            <div key={item.id}>
+              <input
+                type='text'
+                className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full'
+                placeholder={`${index + 1}. Kitob nomini kiriting`}
+                {...register(`books.${index}.bookName`, { required: true })}
+              />
 
-                <div className='flex gap-5 mt-6'>
-
-                  <label className='flex flex-col text-gray-700 text-sm font-medium '>
-                    <span className='block text-gray-500'>Sahifadan</span>
-                    <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md'  {...register(`pageFrom${index}`, { required: true })} />
-                  </label>
-
-                  <label className='flex flex-col text-gray-700 text-sm font-medium '>
-                    <span className='block text-gray-500'>Sahifagacha</span>
-                    <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md' {...register(`pageTo${index}`, { required: true })} />
-                  </label>
-
-                </div>
+              <div className='flex gap-5 mt-6'>
+                <input
+                  type='text'
+                  className='py-2 px-4 border-2 focus:outline-none rounded-md'
+                  {...register(`books.${index}.pageFrom`, { required: true })}
+                  placeholder='Sahifadan'
+                />
+                <input
+                  type='text'
+                  className='py-2 px-4 border-2 focus:outline-none rounded-md'
+                  {...register(`books.${index}.pageTo`, { required: true })}
+                  placeholder='Sahifagacha'
+                />
               </div>
-            ))}
+
+              <button type='button' onClick={() => remove(index)}>Remove</button>
+            </div>
+          ))}
 
           <div className='flex justify-end'>
-            <button onClick={() => setInputCount(inputCount + 1)} className='mt-6 w-[50px] h-[50px] bg-yellow-400 text-white flex items-center justify-center rounded-full text-[24px]'>
+            <button onClick={() => append({ bookName: '', pageFrom: '', pageTo: '' })} className='mt-6 w-[50px] h-[50px] bg-yellow-400 text-white flex items-center justify-center rounded-full text-[24px]'>
               +
             </button>
           </div>
