@@ -8,8 +8,9 @@ function App() {
   const { register, handleSubmit } = useForm()
   const [inputCount, setInputCount] = useState(1);
 
-  const onSubmit = () => {
-    const data = getValues();
+  const onSubmit = (data) => {
+    console.log(data);
+
     onSendData(data)
   }
 
@@ -43,10 +44,10 @@ function App() {
       <div className="mx-auto max-w-[900px] mt-12">
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
+          {/* <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} /> */}
           <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
 
-          <div>
+          {/* <div>
             <input type='text' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' placeholder={` Kitob nomini kiriting`} {...register(`bookName`, { required: true })} />
 
             <div className='flex gap-5 mt-6'>
@@ -62,7 +63,7 @@ function App() {
               </label>
 
             </div>
-          </div>
+          </div> */}
 
 
           {/* {
