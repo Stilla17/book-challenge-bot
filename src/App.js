@@ -57,7 +57,7 @@ function App() {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
-          <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
+          <input type='number' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
 
           {fields.map((item, index) => (
             <div key={item.id}>
@@ -70,13 +70,13 @@ function App() {
 
               <div className='flex gap-5 mt-6'>
                 <input
-                  type='text'
+                  type='number'
                   className='py-2 px-4 border-2 w-full focus:outline-none rounded-md'
                   {...register(`books.${index}.pageFrom`, { required: true })}
                   placeholder='Sahifadan'
                 />
                 <input
-                  type='text'
+                  type='number'
                   className='py-2 px-4 border-2 w-full focus:outline-none rounded-md'
                   {...register(`books.${index}.pageTo`, { required: true })}
                   placeholder='Sahifagacha'
