@@ -5,7 +5,7 @@ function App() {
 
   const tg = window.Telegram.WebApp
 
-  const { register, handleSubmit, getValues } = useForm()
+  const { register, handleSubmit } = useForm()
   const [inputCount, setInputCount] = useState(1);
 
   const onSubmit = () => {
@@ -46,7 +46,26 @@ function App() {
           <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
           <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
 
-          {
+          <div>
+            <input type='text' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' placeholder={` Kitob nomini kiriting`} {...register(`bookName`, { required: true })} />
+
+            <div className='flex gap-5 mt-6'>
+
+              <label className='flex flex-col text-gray-700 text-sm font-medium '>
+                <span className='block text-gray-500'>Sahifadan</span>
+                <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md'  {...register(`pageFrom`, { required: true })} />
+              </label>
+
+              <label className='flex flex-col text-gray-700 text-sm font-medium '>
+                <span className='block text-gray-500'>Sahifagacha</span>
+                <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md' {...register(`pageTo`, { required: true })} />
+              </label>
+
+            </div>
+          </div>
+
+
+          {/* {
             [...Array(inputCount)].map((_, index) => (
               <div key={index}>
                 <input type='text' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' placeholder={`${index + 1}. Kitob nomini kiriting`} {...register(`bookName${index}`, { required: true })} />
@@ -65,13 +84,13 @@ function App() {
 
                 </div>
               </div>
-            ))}
-
+            ))} */}
+          {/* 
           <div className='flex justify-end'>
             <button onClick={() => setInputCount(inputCount + 1)} className='mt-6 w-[50px] h-[50px] bg-yellow-400 text-white flex items-center justify-center rounded-full text-[24px]'>
               +
             </button>
-          </div>
+          </div> */}
 
           <button onClick={onSendButton} className='bg-green-500 text-white py-2 w-full rounded-md mt-12'>Jo'natish</button>
         </form>
