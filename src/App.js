@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import { useForm } from 'react-hook-form';
 function App() {
 
   const tg = window.Telegram.WebApp
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, getValues } = useForm()
   const [inputCount, setInputCount] = useState(1);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
+    const data = getValues();
+    onSendData(data)
   }
 
   useEffect(() => {
@@ -21,6 +22,17 @@ function App() {
     tg.MainButton.show()
   }
 
+  const onSendData = useCallback((data) => {
+    tg.sendData(JSON.stringify(data))
+  }, [])
+
+  useEffect(() => {
+    tg.onEvent('mainButtonClicked', onSendData)
+    return () => {
+      tg.offEvent('mainButtonClicked', onSendData)
+    }
+  }, [onSendData])
+
   return (
     <>
       <header className=' bg-cyan-400'>
@@ -31,8 +43,8 @@ function App() {
       <div className="mx-auto max-w-[900px] mt-12">
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('test', { required: true })} />
-          <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('test', { required: true })} />
+          <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
+          <input type='text' placeholder='ID raqamingizni kiriting' className='py-2 px-4 border-2 focus:outline-none block mt-6 rounded-md w-full' {...register('idNumber', { required: true })} />
 
           {
             [...Array(inputCount)].map((_, index) => (
@@ -43,12 +55,12 @@ function App() {
 
                   <label className='flex flex-col text-gray-700 text-sm font-medium '>
                     <span className='block text-gray-500'>Sahifadan</span>
-                    <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md'  {...register(`Sahifadan${index}`, { required: true })} />
+                    <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md'  {...register(`pageFrom${index}`, { required: true })} />
                   </label>
 
                   <label className='flex flex-col text-gray-700 text-sm font-medium '>
                     <span className='block text-gray-500'>Sahifagacha</span>
-                    <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md' {...register(`Sahifagacha${index}`, { required: true })} />
+                    <input type='text' className='py-2 px-4 border-2 focus:outline-none rounded-md' {...register(`pageTo${index}`, { required: true })} />
                   </label>
 
                 </div>
