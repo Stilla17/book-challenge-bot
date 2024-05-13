@@ -53,7 +53,7 @@ function App() {
           <h1 className='text-[32px] text-white'>Kitobim</h1>
         </nav>
       </header>
-      <div className="mx-auto max-w-[900px] mt-12">
+      <div className="mx-auto max-w-[900px] mt-12 px-4">
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <input type='date' className='border-2 focus:outline-none block rounded-md w-full py-2 px-4' {...register('date', { required: true })} />
@@ -90,13 +90,13 @@ function App() {
               <div className='flex gap-5 mt-6'>
                 <input
                   type='text'
-                  className='py-2 px-4 border-2 focus:outline-none rounded-md'
+                  className='py-2 px-4 border-2 w-full focus:outline-none rounded-md'
                   {...register(`books.${index}.pageFrom`, { required: true })}
                   placeholder='Sahifadan'
                 />
                 <input
                   type='text'
-                  className='py-2 px-4 border-2 focus:outline-none rounded-md'
+                  className='py-2 px-4 border-2 w-full focus:outline-none rounded-md'
                   {...register(`books.${index}.pageTo`, { required: true })}
                   placeholder='Sahifagacha'
                 />
@@ -113,7 +113,7 @@ function App() {
           </div>
 
           <button onClick={onSendButton} className='bg-green-500 text-white py-2 w-full rounded-md mt-12'>Jo'natish</button>
-        </form>
+        </form> max-w-full
       </div>
     </>
   );
